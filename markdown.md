@@ -508,6 +508,7 @@ pip install notebook
 - 값이 같다.
 - a = [], b=[] 이면, a==b
 
-## is
+### is
 
 - 객체 / OOP에서 사용
+
