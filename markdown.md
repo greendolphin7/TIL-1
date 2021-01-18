@@ -483,3 +483,31 @@ def post1(post_id):
 pip install notebook
 ```
 
+# 20210118 Python
+
+## 단축평가
+
+### AND
+
+- T1 and T2 = T2
+- T1 and F1 = F1
+- F1 and T1 = F1
+- F1 and F2 = F1
+
+### OR
+
+- T1 or T2 = T1
+- T1 or F1 = T1
+- F1 or T1 = T1
+- F1 or F2 = F2
+
+## is와 ==
+
+### ==
+
+- 값이 같다.
+- a = [], b=[] 이면, a==b
+
+## is
+
+- 객체 / OOP에서 사용
