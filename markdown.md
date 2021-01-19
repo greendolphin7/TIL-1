@@ -512,3 +512,25 @@ pip install notebook
 
 - 객체 / OOP에서 사용
 
+# 20210119 Python
+
+## enumerate
+
+```python
+for idx, menu in enumerate(lunch, start=1):
+    print(idx, menu)
+```
+
+- 튜플 형태로 반환
+
+## for ~ else
+
+```python
+for num in numbers:
+    if num==4:
+        print(True)
+        break
+else:
+    print(False)
+```
+
