@@ -534,3 +534,81 @@ else:
     print(False)
 ```
 
+# 20210120 Python
+
+## funtion
+
+### 매개변수
+
+- 함수 선언 시 사용하는 변수
+
+### 전달인자
+
+- 함수 실행 시 사용하는 변수
+
+### 키워드 인자
+
+- 직접 변수의 이름으로 특정 인자 전달
+
+```python
+def greeting(age, name='john'):
+    return f'{name}은 {age}살입니다.'
+```
+
+### print vs return
+
+- print : 값을 출력 -> 반환하면 None
+- return : 값을 반환
+
+### 가변인자
+
+```python
+*args = 리스트 형태로 값 전달
+def func(a, b, *args):
+    pass
+```
+
+### 키워드 가변인자
+
+```python
+**kwargs = dict 형태로 값 전달
+def func(**kwargs):
+    pass
+```
+
+## 이름 검색(resolution) 규칙
+
+파이썬에서 사용되는 이름(식별자)들은 이름공간(namespace)에 저장되어 있습니다.
+
+이것을, `LEGB Rule` 이라고 부르며, 아래와 같은 순서로 이름을 찾아나갑니다.
+
+- `L`ocal scope: 정의된 함수
+
+- `E`nclosed scope: 상위 함수
+
+- `G`lobal scope: 함수 밖의 변수 혹은 import된 모듈
+
+- `B`uilt-in scope: 파이썬안에 내장되어 있는 함수 또는 속성
+
+## 예외처리
+
+```python
+try:
+    ~
+except:
+    ~
+else:
+    ~
+finally:
+    ~
+```
+
+## raise
+
+- 에러 발생시 사용
+
+## Recursion
+
+- 반복문과 유사
+- 자기 자신을 호출
+- 탈출 루트가 없으면 무한루프에 빠지게 됨
