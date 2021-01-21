@@ -641,3 +641,20 @@ print(chr(0x61))        # 아스키 코드 번호(16진수)를 문자열로 변�
 print(type(chr(97)))    # 변환후 타입은 'str'
 ```
 
+## 에라토스테네스의 체
+
+```python
+number = int(input())
+
+# 아래에 코드를 작성하시오.
+
+sqrt_number = number**0.5
+for i in range(2, round(sqrt_number//2)+1):
+    if sqrt_number%i==0:
+        print("N")
+        break
+else:
+    print("Y")
+```
+
+- 일단 코드만.
