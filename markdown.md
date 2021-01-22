@@ -658,3 +658,32 @@ else:
 ```
 
 - 일단 코드만.
+
+# 20210122 Python
+
+## project
+
+- gitignore
+
+  - git으로 관리 안 할 파일들의 목록
+
+  - ```bash
+    touch .gitignore
+    ```
+
+- Readme.md
+
+  - 해당 문서를 설명하는 명세서
+
+  - ```bash
+    touch readme.md
+    ```
+
+  - 추가기능도 작성할 수 있는 만큼 작성할 것
+
+  - 대분류도 작성할 것
+
+  - 어려운 부분도 작성할 것
+
+  - 피드백도 작성할 것
+
