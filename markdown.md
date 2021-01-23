@@ -687,3 +687,23 @@ else:
 
   - 피드백도 작성할 것
 
+# 20210123 Python
+
+## (자습)유클리드 호제법
+
+- 최대공약수 구하는 코드(단, a > b)
+
+```python
+def gcd(a, b):
+    if b==0:
+        return a
+    else:
+        return gcd(b, a%b)
+```
+
+- 최소공배수 구하는 코드
+
+```python
+lcm = int((num1*num2)/gcd)
+```
+
