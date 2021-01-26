@@ -707,3 +707,27 @@ def gcd(a, b):
 lcm = int((num1*num2)/gcd)
 ```
 
+# 20210126 Python
+
+## List Comprehension
+
+```python
+[i for i in range(1,11)]
+```
+
+## map
+
+- iterable한 것들을 위해 탄생
+- 순회가능한 데이터 구조(iterable)의 모든 요소에 function을 적용한 후 그 결과를 돌려준다. 
+- return은 `map_object` 형태이다.
+
+```python
+numbers = [1, 2, 3]
+list(map(str, numbers))
+## ['1','2','3']
+```
+
+## module
+
+- 파일 단위의 코드 재사용
+
