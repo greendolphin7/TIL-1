@@ -731,3 +731,281 @@ list(map(str, numbers))
 
 - 파일 단위의 코드 재사용
 
+```python
+## check.py
+def odd(n):
+    return bool(n % 2)
+
+def even(n):
+    return not bool(n % 2)
+```
+
+
+
+```python
+import check
+```
+
+
+
+## package
+
+- 패키지(pakcage)는 **점(`.`)으로 구분된 모듈 이름(`package.module`)** 을 써서 모듈을 구조화하는 방법입니다.
+- **`__init__.py`**?
+
+> python3.3 버전부터는 `__init__.py` 파일이 없어도 패키지로 인식합니다(PEP 420). 하지만 하위 버전 호환 및 일부 프레임워크에서의 올바른 동작을 위해 `__init__.py` 파일을 생성하는 것이 권장됩니다.
+
+
+
+# 20210127 Python
+
+## OOP
+
+객체 지향 프로그래밍
+
+객체를 만든다.
+
+
+
+# 20210128 Python
+
+```python
+import random
+import time
+
+
+class Pocketmon:
+    def __init__(self, name, hp=100, level=1):
+        self.name = name
+        self.hp = hp
+        self.level = level
+        
+    def sleep(self):
+        print(f'{self.name}의 잠자기!')
+        self.hp = 100
+        print(f'{self.name}의 체력이 {self.hp}만큼 회복되었다!')
+    
+    def body_attack(self, attacker, defender):
+        print(f'{self.name}의 몸통박치기!')
+        defender.hp -= attacker.level*10
+        if defender.hp >= 0:
+            print(f'{defender.name}는(은) {attacker.level*10}의 피해를 입었다! 남은 에너지는 {defender.hp}!')
+            if defender.hp == 0 or defender.hp<0:
+                print(f'{defender.name}은 쓰러졌다!')
+                attacker.level+=1
+                print(f'{attacker.name}은 레벨 {attacker.level}으로 레벨이 올랐다!')
+                
+class Charmander(Pocketmon):
+    def __init__(self, name):
+        super().__init__(name)  
+        self.type = 'Fire'
+        self.name = name
+
+    def ember(self, attacker, defender):
+        print(f'{self.name}의 불꽃세례!')
+        
+        if defender.type == 'Grass':
+            defender.hp -= attacker.level*20
+            print(f'효과가 뛰어났다!')
+        elif defender.type == 'Water' or defender.type=='Fire':
+            defender.hp -= attacker.level*5
+            print(f'효과가 별로인 듯 하다.')
+        else :
+            defender.hp -= attacker.level*10
+            
+        if defender.hp > 0:
+            print(f'{defender.name}는(은) {attacker.level*10}의 피해를 입었다! 남은 에너지는 {defender.hp}!')
+        else:
+            print(f'{defender.name}은 쓰러졌다!')
+            attacker.level+=1
+            print(f'{attacker.name}은 레벨 {attacker.level}으로 레벨이 올랐다!')
+    
+class Squirtle(Pocketmon):
+    def __init__(self, name):
+        super().__init__(name)
+        self.name = name
+        self.type = 'Water'
+        
+    def water_gun(self, attacker, defender):
+        print(f'{self.name}의 물대포!')
+        
+        if defender.type == 'Fire':
+            defender.hp -= attacker.level*20
+            print(f'효과가 뛰어났다!')
+        elif defender.type == 'Water' or defender.type=='Grass':
+            defender.hp -= attacker.level*5
+            print(f'효과가 별로인 듯 하다.')
+        else :
+            defender.hp -= attacker.level*10
+            
+        if defender.hp > 0:
+            print(f'{defender.name}는(은) {attacker.level*10}의 피해를 입었다! 남은 에너지는 {defender.hp}!')
+        else:
+            print(f'{defender.name}은 쓰러졌다!')
+            attacker.level+=1
+            print(f'{attacker.name}은 레벨 {attacker.level}으로 레벨이 올랐다!')
+            
+class Bulbasaur(Pocketmon):
+    def __init__(self, name):
+        super().__init__(name)  
+        self.name = name
+        self.type = 'Grass'
+        
+    def vine_whip(self, attacker, defender):
+        print(f'{self.name}의 덩쿨 채찍!')
+        
+        if defender.type == 'Water':
+            defender.hp -= attacker.level*20
+            print(f'효과가 뛰어났다!')
+        elif defender.type == 'Fire' or defender.type=='Grass':
+            defender.hp -= attacker.level*5
+            print(f'효과가 별로인 듯 하다.')
+        else :
+            defender.hp -= attacker.level*10
+            
+        if defender.hp > 0:
+            print(f'{defender.name}는(은) {attacker.level*10}의 피해를 입었다! 남은 에너지는 {defender.hp}!')
+        else:
+            print(f'{defender.name}은 쓰러졌다!')
+            attacker.level+=1
+            print(f'{attacker.name}은 레벨 {attacker.level}으로 레벨이 올랐다!')
+            
+Charmander = Charmander(name='파이리')
+Squirtle = Squirtle(name='꼬부기')
+Bulbasaur = Bulbasaur(name='이상해씨')
+
+your_name = input('당신의 이름을 입력해주세요.')
+rival_name = input('라이벌의 이름을 입력해주세요.')
+
+print(f'''
+오박사 : 오 {your_name}이 왔구나! {rival_name}도 방금 도착했단다!
+포켓몬 세상에 나가기 위해서는 포켓몬이 필요하지! 포켓몬을 골라주겠니?
+1. 파이리
+2. 꼬부기
+3. 이상해씨
+''')
+while True:
+    choice = int(input('당신의 포켓몬을 골라주세요'))
+    rival_choice = ''
+    if choice==1:
+        your_pkmn = Charmander
+        rival_pkmn = Squirtle
+        break
+    elif choice==2:
+        your_pkmn = Squirtle
+        rival_pkmn = Bulbasaur
+        break
+    elif choice==3:
+        your_pkmn = Bulbasaur
+        rival_pkmn = Charmander
+        break
+    else:
+        print("오박사 : 어이쿠 그런 포켓몬은 없단다. 다시 골라보겠니?")
+print(f"{rival_name} : 이렇게 포켓몬도 받았으니, 한 번 시합해보자!")
+winner = ''
+if choice==1:
+    while your_pkmn.hp>0 and rival_pkmn.hp>0:
+        your_move = random.randint(1,11)
+        rival_move = random.randint(1,10)
+        if your_move < 7:
+            print("나의 ",end=' ')
+            your_pkmn.ember(your_pkmn, rival_pkmn)
+        elif your_move == 10:
+            print("나의 ",end=' ')
+            your_pkmn.sleep()
+        else:
+            print("나의 ",end=' ')
+            your_pkmn.body_attack(your_pkmn, rival_pkmn)
+        if rival_pkmn.hp <= 0:
+            print("당신의 승리입니다!")
+            winner = 'you'
+            break
+        time.sleep(2)
+        print("========================================")
+        if rival_move < 4:
+            print("적의 ",end=' ')
+            rival_pkmn.water_gun(rival_pkmn, your_pkmn)
+        else:
+            print("적의 ",end=' ')
+            rival_pkmn.body_attack(rival_pkmn, your_pkmn)
+        if your_pkmn.hp <= 0:
+            print("라이벌의 승리입니다!")
+            winner = 'rival'
+            break
+        time.sleep(2)
+        print("========================================")
+
+elif choice==2:
+    while your_pkmn.hp>0 and rival_pkmn.hp>0:
+        your_move = random.randint(1,11)
+        rival_move = random.randint(1,10)
+        if your_move < 7:
+            print("나의 ",end=' ')
+            your_pkmn.water_gun(your_pkmn, rival_pkmn)
+        elif your_move == 10:
+            print("나의 ",end=' ')
+            your_pkmn.sleep()
+        else:
+            print("나의 ",end=' ')
+            your_pkmn.body_attack(your_pkmn, rival_pkmn)
+        if rival_pkmn.hp <= 0:
+            print("당신의 승리입니다!")
+            winner = 'you'
+            break
+        time.sleep(2)
+        print("========================================")
+        if rival_move < 4:
+            print("적의 ",end=' ')
+            rival_pkmn.vine_whip(rival_pkmn, your_pkmn)
+        else:
+            print("적의 ",end=' ')
+            rival_pkmn.body_attack(rival_pkmn, your_pkmn)
+        if your_pkmn.hp <= 0:
+            print("라이벌의 승리입니다!")
+            winner = 'rival'
+            break
+        time.sleep(2)
+        print("========================================")
+elif choice==3:
+    while your_pkmn.hp>0 and rival_pkmn.hp>0:
+        your_move = random.randint(1,11)
+        rival_move = random.randint(1,10)
+        if your_move < 7:
+            print("나의 ",end=' ')
+            your_pkmn.vine_whip(your_pkmn, rival_pkmn)
+        elif your_move == 10:
+            print("나의 ",end=' ')
+            your_pkmn.sleep()
+        else:
+            print("나의 ",end=' ')
+            your_pkmn.body_attack(your_pkmn, rival_pkmn)
+        if rival_pkmn.hp <= 0:
+            print("당신의 승리입니다!")
+            winner = 'you'
+            break
+        time.sleep(2)
+        print("========================================")
+        if rival_move < 4:
+            print("적의 ",end=' ')
+            rival_pkmn.ember(rival_pkmn, your_pkmn)
+        else:
+            print("적의 ",end=' ')
+            rival_pkmn.body_attack(rival_pkmn, your_pkmn)
+        if your_pkmn.hp <= 0:
+            print("라이벌의 승리입니다!")
+            winner = 'rival'
+            break
+        time.sleep(2)
+        print("========================================")
+            
+if winner=='you':
+    print(f'{your_name}은 시간이 흘러 포켓몬 마스터가 되었습니다. 축하합니다!')
+else:
+    print(f'{rival_name} : 너는 포켓몬에 재능이 없는 거 같아. 가서 파이썬이라도 더 공부해 보면 어때?')
+    print(f'{your_name}은 포켓몬에 재능이 없는 걸 깨닫고 프로그래밍을 공부해서 좋은 개발자가 되었습니다. 축하합니다!')
+
+print("The End. 다시 하시겠다면 커널을 리스타트해주세요.")
+```
+
+
+
