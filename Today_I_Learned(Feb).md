@@ -39,3 +39,20 @@
     - width, height 속성 사용 불가
   - inline-block : inline+block
   - none : 화면에 표시하지 않음(공간도 남지 않음)
+
+# 20210203 HTML/CSS
+
+## float
+
+- 옛날에 화면을 정렬하기 위해 많이 씀
+- 요즘 안 씀
+
+## flexbox
+
+- SOTA
+- https://flexboxfroggy.com/#ko 를 숙달할 것
+
+## grid
+
+- bootstrap 기준 col은 12개가 있음
+- bootstrap 기준 요소를 나누는 기준은 6개가 있음(xs, )
